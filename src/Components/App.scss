@@ -1,0 +1,27 @@
+body {
+  padding: 0;
+  margin-top: 30px;
+}
+
+.app {
+  background-color: white;
+  text-align: center;
+  height: 100px;
+  .title {
+    color: black;
+  }
+}
+.search {
+  height: 30px;
+  width: 500px;
+  padding-left: 4px;
+  border-color: gray
+}
+.getWeather{
+  height: 30px;
+  width: 500px;
+  background-color: white;
+  text-align: center;
+  margin-top: 30px;
+  border-color: blue
+}
