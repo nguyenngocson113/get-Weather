@@ -1,27 +1,41 @@
-body {
-  padding: 0;
-  margin-top: 30px;
-}
-
-.app {
+.MyComponent {
   background-color: white;
-  text-align: center;
   height: 100px;
-  .title {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  margin: auto;
+
+  &-title {
     color: black;
+    text-align: left;
+    weight: bold;
   }
-}
-.search {
-  height: 30px;
-  width: 500px;
-  padding-left: 4px;
-  border-color: gray
-}
-.getWeather{
-  height: 30px;
-  width: 500px;
-  background-color: white;
-  text-align: center;
-  margin-top: 30px;
-  border-color: blue
+  &-body {
+    padding: 0;
+    margin-top: 30px;
+    text-align: left;
+    left: 20%;
+    right: 20%;
+  }
+  &-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    vertical-align:middle;
+    text-align: center;
+    background: rgb(41, 128, 185);
+    height: 500px
+  }
+  &--image{
+    margin-top: auto;
+  }
+  &-field{
+    background-color: black;
+    color: white;
+    display: inline;
+    }
 }

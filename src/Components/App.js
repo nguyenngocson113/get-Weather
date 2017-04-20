@@ -1,49 +1,72 @@
 import React, { Component } from 'react';
-import Temperature from '../Api';
+import APIgetContent from '../Api';
 import './App.scss';
 
 export default class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      notice: '',
-      inputValue: ''
+      body: '',
+      headline: '',
+      abstract: '',
+      filename: '',
+      contentClassification:'',
+      caption:'',
+      name:'',
+      baseurl:''
     }
   }
+
   componentWillMount() {
-    console.log('hello');
-  }
-  getWeather(){
     const {
-      inputValue: city
+      content
     } = this.state;
-    console.log(city)
-    Temperature.getTemp(city, (data) => {
-      const {
-        data: {
-          main: {
-            temp
-          }
+    APIgetContent.getContent((data) => {
+    const {
+      data:{
+        body,
+        headline,
+        abstract,
+        contentClassification,
+        owner:{
+          name,
+          baseurl
+        },
+        storyimages,
         }
-      } = data;
-      const notice = `It is ${temp} in ${city}`;
-      this.setState({notice})
+    } = data;
+
+    const [{
+      filename,
+      caption
+    }] = storyimages;
+      this.setState({ body, headline, abstract, filename, caption, contentClassification, name, baseurl })
     })
   }
-  updateInputValue(e){
-    this.setState({ inputValue: e.target.value });
-  }
+
+
   render () {
     const {
-      notice ='',
-      inputValue = ''
+      body = '',
+      headline = '',
+      abstract = '',
+      filename = '',
+      contentClassification ='',
+      caption='',
+      name='',
+      baseurl=''
     } = this.state;
+    console.log(caption);
     return (
-      <div class="app">
-        <h1 class="title">Get Weather</h1>
-        <input class= "search" value={this.state.inputValue} onChange={(e) => this.updateInputValue(e)} placeholder= "Search weather by city" ></input><br/>
-        <button class= "getWeather" onClick={() => this.getWeather()} >Get Weather</button>
-        <p>{notice}</p>
+      <div class="MyComponent">
+        <div class="MyComponent-img"><img class="MyComponent-img--image" src={filename}/></div>
+        <div>{caption}</div>
+        <div>
+        <div class="MyComponent-field">{contentClassification}</div>
+        <h1 class="MyComponent-title">{headline}</h1>
+        <div dangerouslySetInnerHTML={{__html: abstract}} /></div>
+        <p><strong><strong>By {name}<br></br>From <a href= {`http://${baseurl}`} target="_blank">{name}</a></strong></strong></p>
+        <div class = "MyComponent-body"dangerouslySetInnerHTML={{__html: body}} />
       </div>
     )
   }
